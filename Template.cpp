@@ -20,6 +20,7 @@ using namespace std;
 #define sz size()
 #define infinity 1e18;
 #define elif else if
+#define mod 1e9;
 
 int32_t main(){
     fastIO
