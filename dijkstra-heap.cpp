@@ -1,6 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include<bits/stdc++.h> 
+using namespace std; 
 
+#define INF 0x3f3f3f3f   
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define int long long int
 #define fi first
@@ -20,62 +21,66 @@ using namespace std;
 #define sz size()
 #define infinity 1e18;
 #define elif else if
-
-void addEdge(vector<pi> adj[],int u,int v,int wt) {
-    adj[u].pub(mkp(v,wt));
-    adj[v].pub(mkp(u,wt));
-}
-
-void shortestPath(vector<pi> adj[],int V,int src) {
-    priority_queue<minpq(pi)> pq;
-    vector<int> dist(V,INT_MAX);
+#define mod 1e9; 
+  
+void addEdge(vector <pair<int, int> > adj[], int u, 
+                                     int v, int wt) 
+{ 
+    adj[u].push_back(make_pair(v, wt)); 
+    adj[v].push_back(make_pair(u, wt)); 
+} 
+   
+void shortestPath(vector<pi> adj[], int V, int src) 
+{ 
     
-    pq.push(mkp(0,src));
-    dist[src] = 0;
+    priority_queue< minpq(pi) > pq; 
+ 
+    vector<int> dist(V, INF); 
+  
+    pq.push(mkp(0, src)); 
+    dist[src] = 0; 
+  
+    while (!pq.empty()) 
+    {  
+        int u = pq.top().second; 
+        pq.pop(); 
     
-    while(!pq.empty()) {
-        int u = pq.top().se;
-        pq.pop();
-        
-        for(auto x : adj[u]) {
-            int v = x.fi;
-            int weight = x.se;
-            
-            if(dist[v] > dist[u] + weight) {
-                dist[v] = dist[u] + weight;
-                pq.push(mkp(dist[v],v));
-            }
-        }
-    }
-    
-    cout << "Vertex distance from source:\n";
-    
-    rep(i,0,V)
-        cout << i << " " << dist[i];
-        
-    cout << endl;
-}
-
-int32_t main(){
-    fastIO
-    
+        for (auto x : adj[u]) 
+        { 
+            int v = x.first; 
+            int weight = x.second; 
+  
+             
+            if (dist[v] > dist[u] + weight) 
+            { 
+                dist[v] = dist[u] + weight; 
+                pq.push(mkp(dist[v], v)); 
+            } 
+        } 
+    } 
+  
+    printf("Vertex Distance from Source\n"); 
+    for (int i = 0; i < V; ++i) 
+        printf("%lld \t\t %lld\n", i, dist[i]); 
+} 
+  
+int32_t main() 
+{ 
     int V,E;
-    cin >> V >> E;
-    
-    vector<pi> adj[V];
-    
-    int u,v,wt;
-    
+    cin >> V >> E; 
+    vector<pi> adj[V]; 
+  
     rep(i,0,E) {
-        cin >> u >> v >> wt;
-        
-        addEdge(adj,u,v,wt);
-    }
+        int u,v,w;
 
+        cin >> u >> v >> w;
+
+        addEdge(adj,u,v,w);
+    } 
+  
     int src;
     cin >> src;
-
-    shortestPath(adj,V,src);
-
-    return 0;
-}
+    shortestPath(adj, V, src); 
+  
+    return 0; 
+} 
