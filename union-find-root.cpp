@@ -50,6 +50,7 @@ int union(int Arr[ ] ,int A ,int B)
     int root_B = root(Arr, B);  
     Arr[ root_A ] = root_B ;       
 }
+
 bool find(int A,int B)
 {
     if( root(A)==root(B) )       
